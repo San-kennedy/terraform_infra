@@ -10,9 +10,9 @@ aws_secret_access_key = <secret key>
 ```
 ## Terraform modules in repo
 
-Compute       : Responsible for setting up EC2 instances
-NetworkPlane  : Sets up the public and private networks in a region
-Securitygroup : Responsible for setting up security group as required
+- Compute       : Responsible for setting up EC2 instances
+- NetworkPlane  : Sets up the public and private networks in a region
+- Securitygroup : Responsible for setting up security group as required
 
 ## Deployment key
 
