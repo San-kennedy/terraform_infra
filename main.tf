@@ -31,7 +31,7 @@ module "networkplane_a" {
   public_cidrblock    = "10.0.0.0/24"
 }
 
-module "networkplane_b" {
+module "networkplane_c" {
 
   source = "modules/networkplane"
   #although mentioned as defaults in module, specifying them to clear any ambiguity
@@ -99,7 +99,7 @@ module "public_subnet_instance" {
   service_name = "public"
   instance_count = 1
   instance_public_ip = true
-  instance_subnet = ["${module.networkplane_b.networkplane_publicsubnet_id}"]
+  instance_subnet = ["${module.networkplane_c.networkplane_publicsubnet_id}"]
   instance_sg = ["${module.public_instance_sg.securitygroup_sg_id}"]
   hostname_prefix = "zene"
   instance_type = "t3.micro"
