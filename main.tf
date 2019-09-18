@@ -18,7 +18,7 @@ resource "aws_internet_gateway" "play_gw" {
   depends_on = ["aws_vpc.play_network"]
 }
 
-
+#Creating network in zone A with nat gateway for private subnet
 module "networkplane_a" {
 
   source = "modules/networkplane"
@@ -31,6 +31,7 @@ module "networkplane_a" {
   public_cidrblock    = "10.0.0.0/24"
 }
 
+#Creating network in zone C along with nat gateway for private subnet
 module "networkplane_c" {
 
   source = "modules/networkplane"
@@ -43,11 +44,13 @@ module "networkplane_c" {
   public_cidrblock    = "10.0.2.0/24"
 }
 
+#Creating the keypair with user provided public ssh key
 resource "aws_key_pair" "deploykey" {
   key_name   = "deploykey"
   public_key = "${var.publickey}"
 }
 
+# provisioning private instance zone a
 module "private_instance_sg" {
   source = "modules/securitygroup"
   sg_name = "private_instance_sg"
@@ -61,6 +64,7 @@ module "private_instance_sg" {
   sg_ingress_rules = ["vpc-all-tcp"]
 }
 
+# provisioning public instance in zone c
 module "public_instance_sg" {
   source = "modules/securitygroup"
   sg_name = "public_instance_sg"
